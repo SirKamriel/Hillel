@@ -18,6 +18,8 @@ public class ButtonFirstTest {
     public void beforeClass(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("http://the-internet.herokuapp.com/javascript_alerts");
     }
 
 
@@ -25,28 +27,28 @@ public class ButtonFirstTest {
 @Test
     public void jsButtonAcceptTests() throws InterruptedException {
 
-//        driver.manage().window().maximize();
+
 
 
         //тест 1
-        driver.get("http://the-internet.herokuapp.com/javascript_alerts");
+
         driver.findElement(By.xpath("//button[@onclick = 'jsConfirm()']")).click();
        driver.switchTo().alert().accept();
        Thread.sleep(5000);
 
        String text = driver.findElement(By.id("result")).getText();
-    Assert.assertEquals(text, "You clicked: Ok");
+       Assert.assertEquals(text, "You clicked: Ok");
 
 
     }
     @Test
     public void jsButtonCancelTests() throws InterruptedException {
 
-//        driver.manage().window().maximize();
+
 
 
         //тест 1
-        driver.get("http://the-internet.herokuapp.com/javascript_alerts");
+
         driver.findElement(By.xpath("//button[@onclick = 'jsConfirm()']")).click();
         driver.switchTo().alert().dismiss();
         Thread.sleep(5000);
@@ -59,11 +61,11 @@ public class ButtonFirstTest {
     @Test
     public void promptButtonAcceptTests() throws InterruptedException {
 
-//        driver.manage().window().maximize();
+
 
 
         //тест 1
-        driver.get("http://the-internet.herokuapp.com/javascript_alerts");
+
         driver.findElement(By.xpath("//button[@onclick = 'jsPrompt()']")).click();
 
         driver.switchTo().alert().sendKeys("555");
@@ -79,11 +81,11 @@ public class ButtonFirstTest {
     @Test
     public void promptButtonDissmissTests() throws InterruptedException {
 
-//        driver.manage().window().maximize();
+
 
 
         //тест 1
-        driver.get("http://the-internet.herokuapp.com/javascript_alerts");
+
         driver.findElement(By.xpath("//button[@onclick = 'jsPrompt()']")).click();
 
         driver.switchTo().alert().sendKeys("555");
@@ -98,7 +100,9 @@ public class ButtonFirstTest {
     }
     @AfterClass
     public  void afterClass() {
-        if (driver !=null){}
+        if (driver !=null){
+            driver.close();
+        }
 
     }
 }
